@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Password Gate</title>
+  <style>
+    body { font-family: system-ui, Arial; display:flex; min-height:100vh; align-items:center; justify-content:center; background:#f6f7fb; }
+    .box { background:#fff; padding:24px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); width:320px; text-align:center; }
+    input { width:100%; padding:10px; margin-top:12px; border-radius:6px; border:1px solid #ddd; }
+    button { margin-top:12px; padding:10px 14px; border-radius:6px; cursor:pointer; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h3>Enter password</h3>
+    <input id="pw" type="password" placeholder="password">
+    <button id="ok">Enter</button>
+    <p id="msg" style="color:red; display:none;">Wrong password</p>
+
+    <div id="content" class="hidden">
+      <h4>Secret area</h4>
+      <p>This is the protected content. Replace with your real content or <a id="link" href="#">link</a>.</p>
+    </div>
+  </div>
+
+  <script>
+    // WARNING: password visible in source (insecure)
+    const PIN = "milkpalaceadmin"; // change this to your password
+    document.getElementById('ok').onclick = () => {
+      const val = document.getElementById('pw').value;
+      if (val === PIN) {
+        document.getElementById('msg').style.display = 'none';
+        document.querySelector('.box input').style.display = 'none';
+        document.querySelector('.box button').style.display = 'none';
+        document.getElementById('content').classList.remove('hidden');
+      } else {
+        document.getElementById('msg').style.display = 'block';
+      }
+    };
+    // optional: press Enter
+    document.getElementById('pw').addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('ok').click(); });
+  </script>
+</body>
+</html>
